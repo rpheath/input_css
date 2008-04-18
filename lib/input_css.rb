@@ -1,3 +1,6 @@
+# Modifies the 'options' of the tag helper so that, by default,
+# there's a CSS class attribute based on the type attribute
+# (Note: only applies to input fields)
 module ActionView
   module Helpers
     module TagHelper
@@ -25,7 +28,8 @@ module ActionView
         end
     end
     
-    # ensure that the new #tag method is always called
+    # ensure that the new #tag_with_default_css
+    # method is always called
     class InstanceTag
       alias_method :tag_without_error_wrapping, :tag_with_default_css
     end
