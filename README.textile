@@ -36,6 +36,8 @@ Gives us:
 
 <pre><code><input name="commit" type="submit" class="button submit" value="Fix Me" /></code></pre>
 
+h2. The CSS
+
 So now, you can do this in your CSS:
 
 <pre><code>
@@ -55,6 +57,8 @@ input.radio {
   /* ... */
 }
 </code></pre>
+
+And things are _much_ easier to style :-)
 
 h2. License
 
