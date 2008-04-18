@@ -4,6 +4,28 @@ describe "InputCSS" do
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormTagHelper
   
+  describe "tapping into the TagHelper#tag method" do
+    it "should have class='text' for type='text'" do
+      tag('input', {:type => 'text'}).
+        should eql("<input class=\"text\" type=\"text\" />")
+    end
+    
+    it "should have class='text' for type='password'" do
+      tag('input', {:type => 'password'}).
+        should eql("<input class=\"text\" type=\"password\" />")
+    end
+    
+    it "should have class='submit' for type='submit'" do
+      tag('input', {:type => 'submit'}).
+        should eql("<input class=\"submit\" type=\"submit\" />")
+    end
+    
+    it "should have class='reset' for type='reset'" do
+      tag('input', {:type => 'reset'}).
+        should eql("<input class=\"reset\" type=\"reset\" />")
+    end
+  end
+  
   describe "ActionView::Helpers" do    
     describe "use examples shown in TagHelper#tag documentation" do
       # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/taghelper/tag.html)
