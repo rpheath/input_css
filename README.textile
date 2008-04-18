@@ -6,6 +6,8 @@ h2. Reasoning...
 
 One of the biggest pains when designing forms is dealing with the input field. It's both a button and a text box. And you NEVER want them to look the same (and if you do, your issues are far past what this plugin has to offer).
 
+And of course, this plugin exists mainly because of IE6's lack of CSS2 support. Blah.
+
 h2. Installation
  
 You can install this as a plugin. Navigate to your project root and type:
