@@ -40,12 +40,19 @@ So now, you can do this in your CSS:
 
 <pre><code>
 input.text {
-  font-size: 1.1em;
-  border-top: 1px solid #aaa;
+  /* ... */
 }
 input.submit {
-  padding: 5px;
-  margin-right: 10px;
+  /* ... */
+}
+input.file {
+  /* ... */
+}
+input.checkbox {
+  /* ... */
+}
+input.radio {
+  /* ... */
 }
 </code></pre>
 
