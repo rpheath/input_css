@@ -15,7 +15,7 @@ module ActionView
       
       private
         def css_options_for_tag(name, options)
-          options.symbolize_keys!
+          options = HashWithIndifferentAccess.new(options)
           return options if options[:type] == 'hidden'
 
           # alter CSS class based on type 
@@ -24,7 +24,7 @@ module ActionView
             type, css = options[:type], options[:class]
             options[:class] = "#{css.to_s} #{type.to_s}" unless css && css.split.include?(type)
           end
-          options.stringify_keys!
+          options
         end
     end
     
