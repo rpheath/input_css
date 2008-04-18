@@ -1,0 +1,52 @@
+h1. Input CSS
+
+This plugin taps into Rails tag helpers and adds a CSS class equal to the type attribute for all 'input' fields.
+
+h2. Reasoning...
+
+One of the biggest pains when designing forms is dealing with the input field. It's both a button and a text box. And you NEVER want them to look the same (and if you do, your issues are far past what this plugin has to offer).
+
+h2. Installation
+ 
+You can install this as a plugin. Navigate to your project root and type:
+ 
+<pre><code>git clone git://github.com/rpheath/input_css.git vendor/plugins/input_css</code></pre>
+
+After the installation, you're good to go.
+
+h2. Example(s)
+
+Here's how it works.
+
+h3. Example 1: without existing CSS
+
+<pre><code><%= f.text_field :name -%></code></pre>
+
+Gives us:
+
+<pre><code><input type="text" class="text" name="user[name]" value="" /></code></pre>
+
+h3. Example 2: with existing CSS
+
+<pre><code><%= submit_tag 'Fix Me', :class => 'button' -%></code></pre>
+
+Gives us:
+
+<pre><code><input name="commit" type="submit" class="button submit" value="Fix Me" /></code></pre>
+
+So now, you can do this in your CSS:
+
+<pre><code>
+input.text {
+  font-size: 1.1em;
+  border-top: 1px solid #aaa;
+}
+input.submit {
+  padding: 5px;
+  margin-right: 10px;
+}
+</code></pre>
+
+h2. License
+
+Copyright (c) 2008 Ryan Heath (http://rpheath.com), released under the MIT license
