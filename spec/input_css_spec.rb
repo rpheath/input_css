@@ -2,64 +2,32 @@ require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe "InputCSS" do
   include ActionView::Helpers::TagHelper
-  include ActionView::Helpers::FormTagHelper
   
-  describe "tapping into the TagHelper#tag method" do
-    it "should have class='text' for type='text'" do
-      tag('input', {:type => 'text'}).
-        should eql("<input class=\"text\" type=\"text\" />")
+  describe "testing all valid INPUT types" do
+    VALID_TYPES = %w[text submit reset checkbox radio file image button]
+    
+    VALID_TYPES.each do |type|
+      it "should have class='#{type}' for type='#{type}'" do
+        tag('input', { :type => type }).
+          should eql("<input class=\"#{type}\" type=\"#{type}\" />")
+      end
     end
     
     it "should have class='text' for type='password'" do
-      tag('input', {:type => 'password'}).
+      tag('input', { :type => 'password' }).
         should eql("<input class=\"text\" type=\"password\" />")
     end
     
-    it "should have class='submit' for type='submit'" do
-      tag('input', {:type => 'submit'}).
-        should eql("<input class=\"submit\" type=\"submit\" />")
-    end
-    
-    it "should have class='reset' for type='reset'" do
-      tag('input', {:type => 'reset'}).
-        should eql("<input class=\"reset\" type=\"reset\" />")
-    end
-
-    it "should have class='checkbox' for type='checkbox'" do
-      tag('input', {:type => 'checkbox'}).
-        should eql("<input class=\"checkbox\" type=\"checkbox\" />")
-    end
-    
-    it "should have class='radio' for type='radio'" do
-      tag('input', {:type => 'radio'}).
-        should eql("<input class=\"radio\" type=\"radio\" />")
-    end
-    
-    it "should have class='file' for type='file'" do
-      tag('input', {:type => 'file'}).
-        should eql("<input class=\"file\" type=\"file\" />")
-    end
-    
-    it "should have class='image' for type='image'" do
-      tag('input', {:type => 'image'}).
-        should eql("<input class=\"image\" type=\"image\" />")
-    end
-    
-    it "should have class='button' for type='button'" do
-      tag('input', {:type => 'button'}).
-        should eql("<input class=\"button\" type=\"button\" />")
-    end
-    
-    it "should not have class='hidden' for type='hidden'" do
+    it "should not have a class attribute for type='hidden'" do
       tag('input', {:type => 'hidden'}).
         should eql("<input type=\"hidden\" />")
     end
   end
   
+  # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/taghelper/tag.html)
   describe "ActionView::Helpers" do    
     describe "use examples shown in TagHelper#tag documentation" do
-      # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/taghelper/tag.html)
-      it "should not add a default class attribute to non-input tags" do
+      it "should not add a default class attribute to non-INPUT tags" do
         tag('br').should eql("<br />")
         tag('br', nil, true).should eql("<br>")
         tag('img', {:src => 'open & shut.png'}).
@@ -69,8 +37,10 @@ describe "InputCSS" do
       end
     end
     
-    describe "use examples shown in FormTagHelper#text_field_tag documentation" do  
-      # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/formtaghelper/text_field_tag.html)
+    # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/formtaghelper/text_field_tag.html)
+    describe "use examples shown in FormTagHelper#text_field_tag documentation" do
+      include ActionView::Helpers::FormTagHelper  
+      
       it "should behave as expected (according to documentation) with the addition of default class" do
         text_field_tag('name').
           should eql("<input class=\"text\" id=\"name\" name=\"name\" type=\"text\" />")
