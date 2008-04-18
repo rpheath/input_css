@@ -1,9 +1,11 @@
 require File.join(File.dirname(__FILE__), 'spec_helper')
 
 describe "InputCSS" do
-  include ActionView::Helpers::TagHelper
+  AVH = ActionView::Helpers    
   
   describe "testing all valid INPUT types" do
+    include AVH::TagHelper
+    
     VALID_TYPES = %w[text submit reset checkbox radio file image button]
     
     VALID_TYPES.each do |type|
@@ -25,7 +27,9 @@ describe "InputCSS" do
   end
   
   # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/taghelper/tag.html)
-  describe "ActionView::Helpers" do    
+  describe "ActionView::Helpers" do
+    include AVH::TagHelper
+        
     describe "use examples shown in TagHelper#tag documentation" do
       it "should not add a default class attribute to non-INPUT tags" do
         tag('br').should eql("<br />")
@@ -39,7 +43,7 @@ describe "InputCSS" do
     
     # (http://www.noobkit.com/show/ruby/rails/rails-stable/actionpack/actionview/helpers/formtaghelper/text_field_tag.html)
     describe "use examples shown in FormTagHelper#text_field_tag documentation" do
-      include ActionView::Helpers::FormTagHelper  
+      include AVH::FormTagHelper  
       
       it "should behave as expected (according to documentation) with the addition of default class" do
         text_field_tag('name').
@@ -56,6 +60,60 @@ describe "InputCSS" do
           should eql("<input class=\"text\" disabled=\"disabled\" id=\"payment_amount\" name=\"payment_amount\" type=\"text\" value=\"$0.00\" />")
         text_field_tag('ip', '0.0.0.0', :maxlength => 15, :size => 20, :class => 'ip-input').
           should eql("<input id=\"ip\" maxlength=\"15\" name=\"ip\" size=\"20\" type=\"text\" value=\"0.0.0.0\" />")
+      end
+    end
+    
+    describe "testing FormHelpers" do
+      include AVH::FormHelper
+      
+      class Project
+        attr_accessor :title, :is_complete
+        def initialize(title, is_complete)
+          @title, @is_complete = title, is_complete
+        end
+      end
+      
+      before(:each) do
+        @project = Project.new('RPH', true)
+      end
+      
+      # FormHelper#text_field
+      it "should add default css to text_field" do
+        text_field(:project, :title, :object => @project).
+          should eql("<input class=\"text\" id=\"project_title\" name=\"project[title]\" size=\"30\" type=\"text\" value=\"RPH\" />")
+      end
+      
+      # FormHelper#hidden_field
+      it "should not add css to hidden_field" do
+        hidden_field(:project, :title, :object => @project).
+          should eql("<input id=\"project_title\" name=\"project[title]\" type=\"hidden\" value=\"RPH\" />")
+      end
+      
+      # FormHelper#password_field
+      it "should add default css of 'text' to password_field" do
+        password_field(:project, :title, :object => @project).
+          should eql("<input class=\"text\" id=\"project_title\" name=\"project[title]\" size=\"30\" type=\"password\" value=\"RPH\" />")
+      end
+      
+      # FormHelper#check_box
+      it "should add default css to check_box" do
+        check_box(:project, :is_complete, :object => @project).
+          should eql(
+            "<input checked=\"checked\" class=\"checkbox\" id=\"project_is_complete\" name=\"project[is_complete]\" type=\"checkbox\" value=\"1\" />" +
+            "<input name=\"project[is_complete]\" type=\"hidden\" value=\"0\" />"
+          )
+      end
+      
+      # FormHelper#radio_button
+      it "should add default css to radio_button" do
+        radio_button(:project, :is_complete, 'yes').
+          should eql("<input class=\"radio\" id=\"project_is_complete_yes\" name=\"project[is_complete]\" type=\"radio\" value=\"yes\" />")
+      end
+      
+      # FormHelper#file_field
+      it "should add default css to file_field" do
+        file_field(:project, :chart).
+          should eql("<input class=\"file\" id=\"project_chart\" name=\"project[chart]\" size=\"30\" type=\"file\" />")
       end
     end
   end
