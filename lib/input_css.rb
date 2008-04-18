@@ -22,7 +22,7 @@ module ActionView
           # (only for <input ... /> tags)
           if name.to_s.downcase =~ /^input$/            
             type, css = options[:type], options[:class]
-            options[:class] = "#{css.to_s} #{type.to_s}" unless css && css.split.include?(type)
+            options[:class] = "#{css.to_s} #{type.to_s}".gsub!(/^ /, '') unless css && css.split.include?(type)
           end
           options
         end
