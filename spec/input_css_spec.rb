@@ -24,6 +24,36 @@ describe "InputCSS" do
       tag('input', {:type => 'reset'}).
         should eql("<input class=\"reset\" type=\"reset\" />")
     end
+
+    it "should have class='checkbox' for type='checkbox'" do
+      tag('input', {:type => 'checkbox'}).
+        should eql("<input class=\"checkbox\" type=\"checkbox\" />")
+    end
+    
+    it "should have class='radio' for type='radio'" do
+      tag('input', {:type => 'radio'}).
+        should eql("<input class=\"radio\" type=\"radio\" />")
+    end
+    
+    it "should have class='file' for type='file'" do
+      tag('input', {:type => 'file'}).
+        should eql("<input class=\"file\" type=\"file\" />")
+    end
+    
+    it "should have class='image' for type='image'" do
+      tag('input', {:type => 'image'}).
+        should eql("<input class=\"image\" type=\"image\" />")
+    end
+    
+    it "should have class='button' for type='button'" do
+      tag('input', {:type => 'button'}).
+        should eql("<input class=\"button\" type=\"button\" />")
+    end
+    
+    it "should not have class='hidden' for type='hidden'" do
+      tag('input', {:type => 'hidden'}).
+        should eql("<input type=\"hidden\" />")
+    end
   end
   
   describe "ActionView::Helpers" do    
