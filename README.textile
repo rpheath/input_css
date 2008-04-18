@@ -41,21 +41,11 @@ h2. The CSS
 So now, you can do this in your CSS:
 
 <pre><code>
-input.text {
-  /* ... */
-}
-input.submit {
-  /* ... */
-}
-input.file {
-  /* ... */
-}
-input.checkbox {
-  /* ... */
-}
-input.radio {
-  /* ... */
-}
+input.text     { ... }
+input.submit   { ... }
+input.file     { ... }
+input.checkbox { ... }
+input.radio    { ... }
 </code></pre>
 
 And things are _much_ easier to style :-)
