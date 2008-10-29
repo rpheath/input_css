@@ -23,7 +23,7 @@ module ActionView
           if name.to_s.downcase =~ /^input$/            
             type, css = options[:type], options[:class]
             type = 'text' if type == 'password'
-            options[:class] = "#{css.to_s} #{type.to_s}".gsub!(/^ /, '') unless css && css.split.include?(type)
+            options[:class] = "#{css.to_s} #{type.to_s}".gsub!(/^\s*/, '') unless css && css.split.include?(type)
           end
           options
         end
